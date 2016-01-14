@@ -24,31 +24,30 @@
       </header>
       <section>
         <h3>
-<a id="欢迎造访mycode主页" class="anchor" href="#%E6%AC%A2%E8%BF%8E%E9%80%A0%E8%AE%BFmycode%E4%B8%BB%E9%A1%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>欢迎造访mycode主页：</h3>
+<a id="欢迎造访mycode主页" class="anchor" href="#%E6%AC%A2%E8%BF%8E%E9%80%A0%E8%AE%BFmycode%E4%B8%BB%E9%A1%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>欢迎造访mycode主页:</h3>
 
-<p>在 <a href="https://github.com/nibaozhu/mycode/tree/master/src/is">trunk/src/is</a> 目录，是一个“基于传输层的接口服务器”程序。它可以实现长连接的多个程序间的数据交换。简化了网络交互密集型程序的部署，效率较高。</p>
-
-<h3>
-<a id="应用场景" class="anchor" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF" aria-hidden="true"><span class="octicon octicon-link"></span></a>应用场景：</h3>
-
-<p>客户端A 向其建立长连接时注册一个32位正整数标志 "12"，客户端B 向其建立长连接时注册一个32位正整数标志 "13"。
-此时 客户端A 之间 客户端B 依据一个 简易的协议（详情在 Documentation） 交换数据。
-如果上述交换的数据是即时聊天讯息，这个场景亦可以理解成一个简易聊天系统。</p>
+<p>在 <a href="https://github.com/nibaozhu/mycode/tree/master/src/is">trunk/src/is</a> 目录,是一个"超级服务器"程序.它可以实现长连接的多个程序间的数据交换.简化了网络交互密集型程序的部署,效率较高.</p>
 
 <h3>
-<a id="设计期间考虑到了什么问题" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E6%9C%9F%E9%97%B4%E8%80%83%E8%99%91%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>设计期间考虑到了什么问题：</h3>
+<a id="应用场景" class="anchor" href="#%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF" aria-hidden="true"><span class="octicon octicon-link"></span></a>应用场景:</h3>
 
-<p>假如某一刻需要转发的报文长度是 1024kb（通常情况下tcp 的读、写缓充区是640kb），第一次写入的时候，通常只能写入 640kb，此时还有 384kb 的报文需要转发，但仍然将“写链表”的节点移除。此时监听目的文件描述符的EPOLLOUT事件，若可以再次做写操作。此时会被捕获，并将程序的该缓存区的地址插入“写链表”用于排队。这提高了效率。</p>
-
-<h3>
-<a id="作者" class="anchor" href="#%E4%BD%9C%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>作者：</h3>
-
-<p>目前的主要作者是 <a href="https://github.com/nibaozhu" class="user-mention">@nibaozhu</a>。</p>
+<p>客户端(例如: A, B)向超级服务器建立长连接时注册分别32位正整数标志(例如: "12", "13"). 客户端依据一个简易的协议(详情在 Documentation) 交换数据.
+如果上述交换的数据是即时聊天讯息,这个场景可以理解成一个简易聊天系统.</p>
 
 <h3>
-<a id="如果遇到bug" class="anchor" href="#%E5%A6%82%E6%9E%9C%E9%81%87%E5%88%B0bug" aria-hidden="true"><span class="octicon octicon-link"></span></a>如果遇到bug：</h3>
+<a id="设计期间考虑到了什么问题" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E6%9C%9F%E9%97%B4%E8%80%83%E8%99%91%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>设计期间考虑到了什么问题:</h3>
 
-<p>请在 问题列表 issues 告知我。</p>
+<p>假如某一刻需要转发的报文长度是 1024kb(通常情况下tcp 的读,写缓冲区容量是640kb).第一次写入的时候,通常只能写入 640kb,此时还有 384kb 的报文需要转发,但仍然将"写链表"的节点移除(原因是如果对方不及时收取刚刚的640kb的话,会导致不必要的EAGAIN错误,因为此时的写操作是盲目性的).此刻需要监听目标文件描述符的 EPOLLOUT 事件,若可以再次做写操作.下次会被捕获,并将程序的该缓充区的地址插入"写链表"用于排队.这提高了效率.</p>
+
+<h3>
+<a id="作者" class="anchor" href="#%E4%BD%9C%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>作者:</h3>
+
+<p>目前的主要作者是 <a href="https://github.com/nibaozhu" class="user-mention">@nibaozhu</a>.</p>
+
+<h3>
+<a id="如果遇到bug" class="anchor" href="#%E5%A6%82%E6%9E%9C%E9%81%87%E5%88%B0bug" aria-hidden="true"><span class="octicon octicon-link"></span></a>如果遇到bug:</h3>
+
+<p>请在 问题列表 issues 告知我.</p>
       </section>
     </div>
     <script src="javascripts/scale.fix.js"></script>
