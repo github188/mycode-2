@@ -12,7 +12,7 @@
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
   </head>
-  <body id="index_html">
+  <body id="index_html" font-family:"Microsoft YaHei" font-size:"14px">
     <div class="wrapper">
       <header>
         <h1>mycode</h1>
@@ -36,7 +36,7 @@
 <h3>
 <a id="设计期间考虑到了什么问题" class="anchor" href="#%E8%AE%BE%E8%AE%A1%E6%9C%9F%E9%97%B4%E8%80%83%E8%99%91%E5%88%B0%E4%BA%86%E4%BB%80%E4%B9%88%E9%97%AE%E9%A2%98" aria-hidden="true"><span class="octicon octicon-link"></span></a>设计期间考虑到了什么问题:</h3>
 
-<p>假如某一刻需要转发的报文长度是 1024kb(通常情况下tcp 的读,写缓冲区容量是640kb).第一次写入的时候,通常只能写入 640kb,此时还有 384kb 的报文需要转发,但仍然将"写链表"的节点移除(原因是如果对方不及时收取刚刚的640kb的话,会导致不必要的EAGAIN错误,因为此时的写操作是盲目性的).此刻需要监听目标文件描述符的 EPOLLOUT 事件,若可以再次做写操作.下次会被捕获,并将程序的该缓充区的地址插入"写链表"用于排队.这提高了效率.</p>
+<p>假如某一刻需要转发的报文长度是 1024kb(通常情况下tcp 的读,写缓冲区容量是640kb).第一次写入的时候,通常只能写入 640kb,此时还有 384kb 的报文需要转发,但仍然将"写链表"的节点移除(原因是如果对方不及时收取刚刚的640kb的话,会导致不必要的EAGAIN错误,因为此时的写操作是盲目性的).此刻需要监听目标文件描述符的 EPOLLOUT 事件,若可以再次做写操作.下次会被捕获,并将程序的该缓冲区的地址插入"写链表"用于排队.这提高了效率.</p>
 
 <h3>
 <a id="作者" class="anchor" href="#%E4%BD%9C%E8%80%85" aria-hidden="true"><span class="octicon octicon-link"></span></a>作者:</h3>
